@@ -5,7 +5,7 @@ import {View, StyleSheet} from 'react-native';
 import ListItem from '../ListItem/ListItem';
 
 
-const listItems = (props) => {
+const placeItems = (props) => {
   const placesOutput = props.places.map((place, i) => (
     <ListItem key={i} placeName={place} />
   ))
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default listItems;
+export default placeItems;
