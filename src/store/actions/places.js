@@ -7,9 +7,11 @@ export const deletePlace = key => {
   };
 }
 
-export const addPlace = placeName => {
+export const addPlace = (placeName, location) => {
+  console.log(location);
   return {
     type: ADD_PLACE,
-    placeName: placeName
+    placeName: placeName,
+    location: location
   };
 }
