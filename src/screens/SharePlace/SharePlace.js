@@ -76,7 +76,6 @@ class SharePlaceScreen extends Component {
   };
 
   locationPickedHandler = location => {
-    console.log('locationPickedHandler()', location);
     this.setState(prevState => {
       return {
         controls: {
@@ -106,7 +105,6 @@ class SharePlaceScreen extends Component {
   }
 
   placeAddedHandler = () => {
-    console.log('[placeAddedHandler] ', this.state.controls.location);
     this.props.onAddPlace(
       this.state.controls.placeName.value,
       this.state.controls.location.value,
