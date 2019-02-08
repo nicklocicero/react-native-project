@@ -3,6 +3,7 @@ package com.awesomereactnativeproject;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.imagepicker.ImagePickerPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -61,7 +62,8 @@ public class MainApplication extends NavigationApplication implements ReactAppli
 		return Arrays.<ReactPackage>asList(
       new VectorIconsPackage(),
       new MainReactPackage(),
-      new MapsPackage()
+      new MapsPackage(),
+      new ImagePickerPackage()
 		);
 	}
 
