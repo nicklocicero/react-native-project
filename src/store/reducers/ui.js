@@ -5,6 +5,7 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
+  console.log(state);
   switch (action.type) {
     case UI_START_LOADING:
       return {
