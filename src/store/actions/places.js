@@ -1,5 +1,16 @@
-import { SET_PLACES, REMOVE_PLACE } from "./actionTypes";
+import {
+  SET_PLACES,
+  REMOVE_PLACE,
+  PLACE_ADDED,
+  START_ADD_PLACE
+} from "./actionTypes";
 import { uiStartLoading, uiStopLoading, authGetToken } from "./index";
+
+export const startAddPlace = () => {
+  return {
+    type: START_ADD_PLACE
+  };
+};
 
 export const addPlace = (placeName, location, image) => {
   return dispatch => {
@@ -24,13 +35,20 @@ export const addPlace = (placeName, location, image) => {
             }
           }
         )
-          .then(res => res.json())
+          .then(res => {
+            if (res.ok) {
+              return res.json();
+            } else {
+              throw new Error();
+            }
+          })
           .then(parsedRes => {
             console.log("parsed response is: ", parsedRes);
             const placeData = {
               name: placeName,
               location: location,
-              image: parsedRes.imageUrl
+              image: parsedRes.imageUrl,
+              imagePath: parsedRes.imagePath 
             };
             return fetch(
               "https://udemy-project-1549569088029.firebaseio.com/places.json?auth=" +
@@ -40,10 +58,17 @@ export const addPlace = (placeName, location, image) => {
                 body: JSON.stringify(placeData)
               }
             )
-              .then(res => res.json())
+              .then(res => {
+                if (res.ok) {
+                  return res.json();
+                } else {
+                  throw new Error();
+                }
+              })
               .then(parsedRes => {
                 console.log(parsedRes);
                 dispatch(uiStopLoading());
+                dispatch(placeAdded());
                 // dispatch(getPlaces()); // update places with the one just added
               })
               .catch(err => {
@@ -61,6 +86,12 @@ export const addPlace = (placeName, location, image) => {
   };
 };
 
+export const placeAdded = () => {
+  return {
+    type: PLACE_ADDED
+  };
+};
+
 export const getPlaces = () => {
   return dispatch => {
     dispatch(authGetToken())
@@ -73,7 +104,13 @@ export const getPlaces = () => {
       .catch(() => {
         alert("No valid token found!");
       })
-      .then(res => res.json())
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error();
+        }
+      })
       .then(parsedRes => {
         const places = [];
         for (let key in parsedRes) {
@@ -119,7 +156,13 @@ export const deletePlace = key => {
           }
         );
       })
-      .then(res => res.json())
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error();
+        }
+      })
       .then(parsedRes => {
         console.log("Done!");
       })

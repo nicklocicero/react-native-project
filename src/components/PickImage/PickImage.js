@@ -8,7 +8,9 @@ class PickImage extends Component {
   };
   
   reset = () => {
-    
+    this.setState({
+      pickedImage: null
+    });
   }
 
   pickImageHandler = () => {

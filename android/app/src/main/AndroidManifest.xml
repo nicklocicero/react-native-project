@@ -15,7 +15,7 @@
       android:theme="@style/AppTheme">
       <meta-data
         android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyC7HZIIeT7hpeZuHBn2AeBQiQsjfjmFMV8"/>
+        android:value="USE_YOUR_API"/>
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"

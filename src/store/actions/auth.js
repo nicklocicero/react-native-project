@@ -5,7 +5,7 @@ import { uiStartLoading, uiStopLoading } from "./index";
 import startMainTabs from "../../screens/MainTabs/startMainTabs";
 import App from "../../../App";
 
-const API_KEY = "USE_YOUR_OWN";
+const API_KEY = "USE_YOUR_API_KEY";
 
 export const tryAuth = (authData, authMode) => {
   return dispatch => {
@@ -35,7 +35,13 @@ export const tryAuth = (authData, authMode) => {
         alert("Authentication failed, please try again!");
         dispatch(uiStopLoading);
       })
-      .then(res => res.json())
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error();
+        }
+      })
       .then(parsedRes => {
         if (!parsedRes.idToken) {
           alert("Authentication failed, please try again!");
